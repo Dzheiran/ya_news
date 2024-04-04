@@ -6,8 +6,9 @@ from django.urls import reverse
 
 from news.forms import CommentForm
 
+pytestmark = pytest.mark.django_db
 
-@pytest.mark.django_db
+
 def test_news_count(client, get_news_list):
     """Проверяем количество новостей на главной странице."""
     url = reverse('news:home')
@@ -17,7 +18,6 @@ def test_news_count(client, get_news_list):
     assert news_count == settings.NEWS_COUNT_ON_HOME_PAGE
 
 
-@pytest.mark.django_db
 def test_news_order(client, get_news_list):
     """Проверяем сортировку новостей на главной странице от новой к старой."""
     url = reverse('news:home')
@@ -28,7 +28,6 @@ def test_news_order(client, get_news_list):
     assert all_dates == sorted_dates
 
 
-@pytest.mark.django_db
 def test_comments_order(client, news_id_for_args, get_cpmments_list):
     """Проверяем сортировку комментариев к новости от старой к новой."""
     url = reverse('news:detail', args=news_id_for_args)
@@ -42,7 +41,6 @@ def test_comments_order(client, news_id_for_args, get_cpmments_list):
     assert all_timestamps == sorted_timestamps
 
 
-@pytest.mark.django_db
 @pytest.mark.parametrize(
     'parametrized_client, form_in_list',
     (

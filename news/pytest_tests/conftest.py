@@ -97,3 +97,9 @@ def get_cpmments_list(author, news):
         comment.save()
         cpmments_list.append(comment)
     return cpmments_list
+
+
+@pytest.fixture
+def form_data():
+    """Получаем данные из формы комментария."""
+    return {'text': 'Новый комментарий'}
